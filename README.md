@@ -2,8 +2,6 @@
 
 Course Homepage: http://www.cis.upenn.edu/~cis194/spring13/
 
-----
-
 ## Progress:
   - [x] Homework 1
   - [ ] Homework 2
