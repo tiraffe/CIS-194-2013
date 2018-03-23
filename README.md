@@ -1,6 +1,6 @@
 # CIS-194: Introduction to Haskell (Spring 2013)
 
-Course Homepage: http://www.cis.upenn.edu/~cis194/spring13/
+Homepage: http://www.cis.upenn.edu/~cis194/spring13/
 
 ## Progress:
   - [x] Homework 1
