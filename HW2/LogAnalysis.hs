@@ -26,10 +26,12 @@ insert x (Node left root right)
     | (getTimeStamp x) > (getTimeStamp root) = Node left root (insert x right)
     where getTimeStamp (LogMessage _ timestamp _)  = timestamp
 
+
 -- Exercise 3
 
 build :: [LogMessage] -> MessageTree
 build = foldr insert Leaf
+
 
 -- Exercise 4
 
