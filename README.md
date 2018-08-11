@@ -10,7 +10,7 @@ Homepage: http://www.cis.upenn.edu/~cis194/spring13/
   - [x] Homework 5
   - [x] Homework 6
   - [x] Homework 7  
-  - [ ] Homework 8  
+  - [x] Homework 8  
   - [ ] Homework 9 
   - [ ] Homework 10
   - [ ] Homework 11
