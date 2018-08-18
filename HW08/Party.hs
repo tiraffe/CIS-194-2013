@@ -21,9 +21,9 @@ treeFold :: (a -> [b] -> b) -> Tree a -> b
 treeFold f tree = f (rootLabel tree) $ map (treeFold f) (subForest tree) 
 
 nextLevel :: Employee -> [(GuestList, GuestList)] -> (GuestList, GuestList)
-nextLevel root costs = (GL [root] (empFun root) <> withRootBest costs, notRootBest costs)
-    where withRootBest    = mconcat . map snd
-          notRootBest     = mconcat . map (\(x, y) -> max x y)
+nextLevel root costs   = (GL [root] (empFun root) <> withRootBest costs, notRootBest costs)
+    where withRootBest = mconcat . map snd
+          notRootBest  = mconcat . map (\(x, y) -> max x y)
 
 maxFun :: Tree Employee -> GuestList
 maxFun = (\(x, y) -> max x y) . treeFold nextLevel 

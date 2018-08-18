@@ -57,3 +57,60 @@ posInt = Parser f
 ------------------------------------------------------------
 -- Your code goes below here
 ------------------------------------------------------------
+
+first :: (a -> b) -> (a,c) -> (b,c)
+first f (a, b) = (f a, b)
+
+instance Functor Parser where  
+  fmap f (Parser g) = Parser h
+    where h xs = (first f) <$> (g xs)
+
+instance Applicative Parser where
+  pure x = Parser (\_ -> Just (x, ""))
+
+  (Parser f) <*> (Parser g) = Parser h
+    where 
+      h xs 
+        | null xs   = Nothing
+        | otherwise = case f xs of
+          Nothing -> Nothing
+          Just (y, ys) -> case g $ dropWhile isSpace ys of
+            Nothing -> Nothing
+            Just (z, zs) -> Just (y z, zs)
+          
+
+abParser :: Parser (Char, Char)
+abParser = Parser f
+  where 
+    f (a:b:xs)
+      | (a == 'a') && (b == 'b') = Just ((a, b), xs)
+      | otherwise                = Nothing
+
+
+toEmpty :: a -> ()
+toEmpty _ = ()
+
+abParser_ :: Parser ()
+abParser_ = toEmpty <$> abParser
+
+
+intPair :: Parser [Integer]
+intPair = makePair <$> posInt <*> posInt
+  where makePair x y = [x, y]
+
+
+instance Alternative Parser where
+  empty = Parser (\x -> Nothing)
+
+  (Parser f) <|> (Parser g) = Parser h
+    where 
+      h xs = case f xs of 
+        Nothing -> g xs
+        _       -> f xs 
+
+
+intOrUppercase :: Parser ()
+intOrUppercase = intParser <|> uppercaseParser
+  where 
+    intParser       = toEmpty <$> (posInt)
+    uppercaseParser = toEmpty <$> (satisfy isUpper)
