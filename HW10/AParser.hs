@@ -66,7 +66,7 @@ instance Functor Parser where
     where h xs = (first f) <$> (g xs)
 
 instance Applicative Parser where
-  pure x = Parser (\_ -> Just (x, ""))
+  pure a = Parser (\s -> Just (a, s))
 
   (Parser f) <*> (Parser g) = Parser h
     where 
